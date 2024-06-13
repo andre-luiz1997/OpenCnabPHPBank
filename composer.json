@@ -1,5 +1,5 @@
 {
-	"name": "openboleto/opencnabphpbank",
+	"name": "andre-luiz1997/opencnabphpbank",
 	"type": "library",
 	"description": "Está biblioteca faz a leitura de arquivos remessa e auxilia na geração de arquivos de retorno, voltado para fintechs desejam recepcionar arquivo de remessa enviados pelos cliente e gerar arquivo de retorno",
 	"keywords": ["boleto", "remessa", "retorno", "cnabphp", "cnab240", "cnab400","itau","bradesco","caixa","santander","sicoob","uniprime"],
@@ -8,6 +8,10 @@
 		{
 			"name": "Rogerio Muniz de Castro",
 			"email": "rogeriomunizcastro@gmail.com"
+		},
+		{
+			"name": "André Luiz Silveira",
+			"email": "andre-luiz1997@hotmail.com"
 		}
 	],
 	"autoload": {
