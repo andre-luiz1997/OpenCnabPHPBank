@@ -62,7 +62,12 @@ abstract class RemessaAbstract {
 
         self::$lines = $lines;
         $this->children[] = new $class($lines[0]);
-
+        self::$linesCounter++;
+        while(self::$linesCounter < count($lines) - 4) {
+            $this->addLote($lines);
+        }
+        
+        self::$linesCounter++;
         $class = 'CnabPHPBank\resources\\B' . self::$banco . '\remessa\\' . self::$layout . '\Registro9';
         $linhasFiltradas = array_filter($lines); // Limpar a última linha em branco
         $this->children[] = new $class($linhasFiltradas[count($linhasFiltradas) - 1]);
@@ -79,14 +84,33 @@ abstract class RemessaAbstract {
     }
 
     /**
+     * método addLote()
+     * Recebe os parametros abaixo e insere num array para uso fururo
+     * @array $data = recebe um array contendo os dados do lote a sera aberto e retorna para qualqer layout 240 o lote criado ou $this se outro
+     */
+    public function addLote(array $data) {
+        
+        if (strpos(self::$layout, 'cnab240')!==false) {
+            $class = '\CnabPHPBank\resources\\B' . self::$banco . '\remessa\\' . self::$layout . '\Registro1';
+            $lote = new $class($data);
+            $this->children[0]->addChild($lote); //ADD AO REGISTRO 0
+        } else {
+            $lote = $this;
+        }
+        return $lote;
+        self::$loteCounter++;
+    }
+
+    /**
      * Método getLote()
      * Metodo estático para pegar o objeto do lote
      * @$index = o indice do lote , normalmente 1
      */
     public function getRegistros($lote = 1)
     {
-        $arquivo = $this->children[0];
-        return $arquivo->getRegistros($lote);
+        return $this->children;
+        // $arquivo = $this->children[0];
+        // return $arquivo->getRegistros($lote);
     }
 
     /**

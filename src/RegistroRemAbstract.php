@@ -31,7 +31,8 @@ use CnabPHPBank\RegistroAbstract;
 use CnabPHPBank\RetornoAbstract;
 use Exception;
 
-abstract class RegistroRemAbstract extends RegistroAbstract {
+abstract class RegistroRemAbstract extends RegistroAbstract
+{
 
     public $linha;
 
@@ -170,5 +171,4 @@ abstract class RegistroRemAbstract extends RegistroAbstract {
     {
         return $this->children[$index];
     }
-
 }

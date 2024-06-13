@@ -35,6 +35,10 @@ class Generico0 extends RegistroRemAbstract {
 
     protected $counter;
 
+    public function addChild($child) {
+        $this->children[] = $child;
+    }
+
     // public function inserirDetalhe($data) {
     //     $class = 'CnabPHPBank\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro1';
     //     $this->children[] = new $class($data);

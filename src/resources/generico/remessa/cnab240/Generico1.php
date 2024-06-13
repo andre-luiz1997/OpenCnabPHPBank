@@ -33,6 +33,23 @@ class Generico1 extends RegistroRemAbstract
 {
 
     protected $counter = 0;
+    public $children = [];
+
+    public function __construct()
+    {
+        $typePos = 13;
+        if (strpos(RemessaAbstract::$layout, 'cnab240')!==false) {
+            RemessaAbstract::$linesCounter++;
+            $line = RemessaAbstract::$lines[RemessaAbstract::$linesCounter];
+            $class = 'CnabPHPBank\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro3P';
+            // $class = 'CnabPHPBank\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro3' . $line[$typePos];
+            $this->addChild(new $class($line));
+        }
+    }
+
+    public function addChild($child) {
+        $this->children[] = $child;
+    }
 
     // protected function set_codigo_lote($value)
     // {
