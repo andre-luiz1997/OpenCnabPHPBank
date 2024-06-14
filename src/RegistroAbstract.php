@@ -34,7 +34,7 @@ use Exception;
 abstract class RegistroAbstract
 {
 
-    protected $data;
+    public $data;
 
     protected $meta;
 
