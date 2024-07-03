@@ -16,7 +16,7 @@ abstract class RetornoAbstract
     public static $endLine = "\r\n"; // contador de lotes
     public static $children = array(); // armazena os registros filhos da classe remessa
     public static $retorno = array(); // durante a geração do txt de retorno se tornara um array com as linhas do arquvio
-    
+
     /**
      * método __construct()
      * Recebe os parametros
@@ -24,7 +24,8 @@ abstract class RetornoAbstract
      * @$layout = nome do layout no momento so Cnab240_SIGCB
      * @$data = um array contendo os dados nessesarios para o arquvio
      */
-    public function __construct($banco, $layout, $data) {
+    public function __construct($banco, $layout, $data)
+    {
 
         self::$banco = $banco;
         self::$layout = strtoupper($layout);
@@ -42,12 +43,9 @@ abstract class RetornoAbstract
      * Recebe os parametros
      * @$data = um array contendo os dados nessesarios para o arquvio
      */
-    public function inserirDetalhe($data) {
-
+    public function inserirDetalhe($data)
+    {
         self::$hearder->inserirDetalhe($data);
-        // $class = '\CnabPHPBank\resources\\B' . self::$banco . '\remessa\\' . self::$layout . '\Registro1';
-        // self::addChild(new $class($data));
-        // self::$counter++;
     }
 
     /**
@@ -55,7 +53,8 @@ abstract class RetornoAbstract
      * Recebe os parametros
      * @$newLayout = altera o layout do lote , servira para enviar lotes de layouts diferentes no mesmo arquvio //(ALERTA) nao testado
      */
-    public function changeLayout($newLayout) {
+    public function changeLayout($newLayout)
+    {
         self::$layout = $newLayout;
     }
 
@@ -64,7 +63,8 @@ abstract class RetornoAbstract
      * Recebe os parametros abaixo e insere num array para uso fururo
      * @RegistroRemAbstract $child = recebe um filho de RegistroRemAbstract
      */
-    static private function addChild(RegistroRemAbstract $child) {
+    static private function addChild(RegistroRemAbstract $child)
+    {
         self::$children[] = $child;
     }
 
@@ -73,9 +73,10 @@ abstract class RetornoAbstract
      * Recebe os parametros abaixo e insere num array para uso fururo
      * @array $data = recebe um array contendo os dados do lote a sera aberto e retorna para qualqer layout 240 o lote criado ou $this se outro
      */
-    public function addLote(array $data) {
-        
-        if (strpos(self::$layout, 'L')!==false) {
+    public function addLote(array $data)
+    {
+
+        if (strpos(self::$layout, 'L') !== false) {
             $class = '\CnabPHPBank\resources\\B' . self::$banco . '\retorno\\' . self::$layout . '\Registro1';
             $loteData = $data ? $data : RetornoAbstract::$entryData;
             $lote = new $class($loteData);
@@ -92,7 +93,8 @@ abstract class RetornoAbstract
      * Metodo statico para pegar o objeto do lote
      * @$index = o indice do lote , normalmente 1
      */
-    public static function getLote($index) {
+    public static function getLote($index)
+    {
         if (strpos(self::$layout, '240')) {
             return self::$children[0]->children[$index - 1];
         } else {
@@ -104,7 +106,8 @@ abstract class RetornoAbstract
      * método getLotes()
      * Metodo statico para pegar os objetos dos lotes
      */
-    public static function getLotes() {
+    public static function getLotes()
+    {
         return self::$children[0]->children;
     }
 
@@ -112,7 +115,8 @@ abstract class RetornoAbstract
      * Método getText()
      * Metodo que percorre todos os filhos acionando o metodo getText() deles
      */
-    public function getText() {
+    public function getText()
+    {
         foreach (self::$children as $child) {
             //echo '<pre>';
             //var_dump($child);
@@ -125,7 +129,8 @@ abstract class RetornoAbstract
         return implode(self::$endLine, self::$retorno) . self::$endLine;
     }
 
-    public function getFileName() {
+    public function getFileName()
+    {
         return self::$children[0]->getFileName();
     }
 

@@ -40,6 +40,8 @@ abstract class RegistroRetAbstract extends RegistroAbstract
      */
     public function __construct($data = NULL)
     {
+        // log_message('debug', 'Classe ' . get_class($this) . ' instanciada');
+        // log_message('debug', 'DATA ' . print_r($data, true));
         if ($data) { // se o ID for informado
             // carrega o objeto correspondente
             $this->entryData = $data;
@@ -55,6 +57,7 @@ abstract class RegistroRetAbstract extends RegistroAbstract
      */
     public function __set($prop, $value)
     {
+        // log_message('debug', 'A função ' . __FUNCTION__ . ' foi chamada para ' . $prop . ' = ' . $value . ';');
         // verifica se existe Método set_<propriedade>
         if (method_exists($this, 'set_' . $prop)) {
             // executa o Método set_<propriedade>
@@ -91,12 +94,16 @@ abstract class RegistroRetAbstract extends RegistroAbstract
      */
     public function ___get($prop)
     {
+        // log_message('debug', 'A função ' . __FUNCTION__ . ' foi chamada por ' . debug_backtrace()[1]['function'] . ' na instância ' . get_class($this));
+        // log_message('debug', 'Propriedade ' . $prop . ';');
         // retorna o valor da propriedade
         if (isset($this->meta[$prop])) {
             $metaData = (isset($this->meta[$prop])) ? $this->meta[$prop] : null;
             $this->data[$prop] = !isset($this->data[$prop]) || $this->data[$prop] == '' ? $metaData['default'] : $this->data[$prop];
             if ($metaData['required'] == true && ($this->data[$prop] == '' || !isset($this->data[$prop]))) {
                 if (isset($this->data['nosso_numero'])) {
+                    // log_message('debug', 'Valor faltante: ' . print_r($this->data[$prop], true));
+                    // log_message('debug', 'Classe: ' . get_class($this));
                     throw new Exception('Campo faltante ou com valor nulo:' . $prop . " Boleto Numero:" . $this->data['nosso_numero']);
                 } else {
                     throw new Exception('Campo faltante ou com valor nulo:' . $prop);
@@ -108,12 +115,15 @@ abstract class RegistroRetAbstract extends RegistroAbstract
 
             switch ($metaData['tipo']) {
                 case 'decimal':
+                    // log_message('debug', 'DECIMAL prop ' . print_r($this->data[$prop], true) . ';');
                     $retorno = (($this->data[$prop] && trim($this->data[$prop]) !== "" ? number_format($this->data[$prop], $metaData['precision'], '', '') : (isset($metaData['default']) ? $metaData['default'] : '')));
                     return str_pad($retorno, $metaData['tamanho'] + $metaData['precision'], '0', STR_PAD_LEFT);
                 case 'int':
+                    // log_message('debug', 'INT prop ' . print_r($this->data[$prop], true) . ';');
                     $retorno = (isset($this->data[$prop]) && trim($this->data[$prop]) !== "" ? number_format($this->data[$prop], 0, '', '') : (isset($metaData['default']) ? $metaData['default'] : ''));
                     return str_pad($retorno, $metaData['tamanho'], '0', STR_PAD_LEFT);
                 case 'alfa':
+                    // log_message('debug', 'alfa prop ' . print_r($this->data[$prop], true) . ';');
                     $retorno = (isset($this->data[$prop])) ? $this->prepareText($this->data[$prop]) : '';
                     return $this->mb_str_pad(mb_substr($retorno, 0, $metaData['tamanho'], "UTF-8"), $metaData['tamanho'], ' ', STR_PAD_RIGHT);
                 case 'alfa2':
@@ -137,6 +147,6 @@ abstract class RegistroRetAbstract extends RegistroAbstract
 
     public function getFileName()
     {
-        return 'R' . RemessaAbstract::$banco . str_pad('U123456' , 6, '0', STR_PAD_LEFT) . '.ret';
+        return 'R' . RetornoAbstract::$banco . str_pad('U123456', 6, '0', STR_PAD_LEFT) . '.ret';
     }
 }
