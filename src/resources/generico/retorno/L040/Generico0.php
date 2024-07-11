@@ -42,16 +42,19 @@ class Generico0 extends RegistroRetAbstract
 
 	protected function set_situacao_arquivo($value)
 	{
+		log_message('debug', 'A função ' . __FUNCTION__ . ' foi chamada por ' . debug_backtrace()[1]['function'] . ' na instância ' . get_class($this));
 		$this->data['situacao_arquivo'] = ($value == 'T') ? "RETORNO-TESTE" : "RETORNO-PRODUCAO";
 	}
 
 	protected function set_data_geracao($value)
 	{
+		log_message('debug', 'A função ' . __FUNCTION__ . ' foi chamada por ' . debug_backtrace()[1]['function'] . ' na instância ' . get_class($this));
 		$this->data['data_geracao'] = date('Y-m-d');
 	}
 
 	protected function set_hora_geracao($value)
 	{
+		log_message('debug', 'A função ' . __FUNCTION__ . ' foi chamada por ' . debug_backtrace()[1]['function'] . ' na instância ' . get_class($this));
 		$this->data['hora_geracao'] = date('His');
 	}
 
