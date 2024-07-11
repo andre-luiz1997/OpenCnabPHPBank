@@ -127,6 +127,7 @@ class Generico1 extends RegistroRetAbstract
 
   protected function set_data_gravacao($value)
   {
+    log_message('debug', 'A função ' . __FUNCTION__ . ' foi chamada por ' . debug_backtrace()[1]['function'] . ' na instância ' . get_class($this));
     $this->data['data_gravacao'] = date('Y-m-d');
   }
 
