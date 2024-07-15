@@ -38,7 +38,7 @@ class Generico1 extends RegistroRemAbstract
     public function __construct()
     {
         $typePos = 13;
-        if (strpos(RemessaAbstract::$layout, 'cnab240')!==false) {
+        if (strpos(RemessaAbstract::$layout, 'cnab240') !== false) {
             RemessaAbstract::$linesCounter++;
             $line = RemessaAbstract::$lines[RemessaAbstract::$linesCounter];
             $class = 'CnabPHPBank\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro3P';
@@ -47,7 +47,8 @@ class Generico1 extends RegistroRemAbstract
         }
     }
 
-    public function addChild($child) {
+    public function addChild($child)
+    {
         $this->children[] = $child;
     }
 
@@ -79,10 +80,10 @@ class Generico1 extends RegistroRemAbstract
     //     }
     // }
 
-    // protected function set_numero_inscricao($value)
-    // {
-    //     $this->data['numero_inscricao'] = $value == '' ? str_ireplace(array('.', '/', '-'), array(''), RemessaAbstract::$entryData['numero_inscricao']) : str_ireplace(array('.', '/', '-'), array(''), $value);
-    // }
+    protected function set_numero_inscricao($value)
+    {
+        $this->data['numero_inscricao'] = $value == '' ? str_ireplace(array('.', '/', '-'), array(''), RemessaAbstract::$entryData['numero_inscricao']) : str_ireplace(array('.', '/', '-'), array(''), $value);
+    }
 
     // protected function set_codigo_beneficiario($value)
     // {
