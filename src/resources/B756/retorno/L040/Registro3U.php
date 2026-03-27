@@ -65,7 +65,7 @@ class Registro3U extends Generico3
 		'filler1' => array(               // 6.9U
 			'tamanho' => 1,
 			'default' => ' ',
-			'tipo' => 'int',
+			'tipo' => 'alfa',
 			'required' => true
 		),
 		'codigo_movimento' => array(      // 7.9U
@@ -147,8 +147,8 @@ class Registro3U extends Generico3
 		),
 		'filler2' => array(          // 18.3
 			'tamanho' => 4,
-			'default' => '0',
-			'tipo' => 'int',
+			'default' => ' ',
+			'tipo' => 'alfa',
 			'required' => true
 		),
 		'data_ocorrencia_do_pagador' => array(        //19.3U
@@ -160,7 +160,8 @@ class Registro3U extends Generico3
 		'valor_ocorrencia_do_pagador' => array(        //20.3U
 			'tamanho' => 13,
 			'default' => '0',
-			'tipo' => 'date',
+			'tipo' => 'decimal',
+			'precision' => 2,
 			'required' => false
 		),
 		'compl_ocorrencia_do_pagador' => array(        //20.3U

@@ -23,6 +23,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace CnabPHPBank\resources\B756\retorno\L040;
 
 use CnabPHPBank\resources\generico\retorno\L040\Generico3;
@@ -92,7 +93,7 @@ class Registro3T extends Generico3
 		'conta' => array(       //10.3T
 			'tamanho' => 12,
 			'default' => '0',
-			'tipo' => 'int',
+			'tipo' => 'alfa',
 			'required' => true
 		),
 		'conta_dv' => array(               // 11.3T
@@ -103,8 +104,10 @@ class Registro3T extends Generico3
 		),
 		'conta_agencia_dv' => array(               // 12.3T
 			'tamanho' => 1,
-			'default' => '0',
-			'tipo' => 'int',
+			'default' => ' ',
+			// 'default' => '0',
+			'tipo' => 'alfa',
+			// 'tipo' => 'int',
 			'required' => true
 		),
 		'nosso_numero' => array(               //13.3T
@@ -126,7 +129,8 @@ class Registro3T extends Generico3
 			'required' => true
 		),
 		'vencimento' => array(  //16.3T
-			'tamanho' => 15,
+			'tamanho' => 8,
+			// 'tamanho' => 15,
 			'default' => '',
 			'tipo' => 'date',
 			'required' => true
@@ -147,8 +151,7 @@ class Registro3T extends Generico3
 		'agencia_recebedora' => array(      //19.3T
 			'tamanho' => 5,
 			'default' => '0',
-			'tipo' => 'decimal',
-			'precision' => 2,
+			'tipo' => 'int',
 			'required' => false
 		),
 		'dv_agencia_receb' => array(        //20.3T
@@ -202,8 +205,8 @@ class Registro3T extends Generico3
 		),
 		'codigo_ocorrencia' => array(            //28.3T
 			'tamanho' => 10,
-			'default' => '0',
-			'tipo' => 'date',
+			'default' => ' ',
+			'tipo' => 'alfa',
 			'required' => true
 		),
 		'filler7' => array(            //29.3T
@@ -254,8 +257,7 @@ class Registro3T extends Generico3
 			$Dv = 0;
 		} else {
 			$Dv = 11 - $Resto;
-		}
-		;
+		};
 		return $Dv;
 	}
 
